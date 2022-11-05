@@ -10,21 +10,19 @@ void setup(){
     star[i] = new Oddball();
   for(int i= 15; i< star.length; i++)
     star[i] = new Particle();
-    //frameRate(60);
+    frameRate(60);
 }
 
 void draw(){
   background(0);
  fill(0);
- //for(int i = 0; i< clyde.length; i++){
- //  clyde[i].show();
- //  clyde[i].drift();
- //}
   for(int i = 0; i< star.length; i++){
    star[i].show();
    star[i].move();
    star[i].reset();
  }
+ fill(0,0,0);
+ ellipse(width/2, height/2, 240,240);
 }
 
 class Particle{
@@ -66,7 +64,7 @@ class Oddball extends Particle{
     myY = height/2;
     myAngle = Math.random()*2*Math.PI;
     mySpeed = Math.random()*5;
-    myColor = color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
+    myColor = color((int)(Math.random()*100)+156,(int)(Math.random()*256),(int)(Math.random()*256));
   }
  void show(){
    fill(255);
@@ -90,16 +88,11 @@ class Cloud extends Particle{
     myAngle = Math.random()*Math.PI;
     mySpeed = Math.random()*1;
     myWidth = (int)(Math.random()*10)+500;
-    myHeight = (int)(Math.random()*20)+100;
-    myColor = (int)(Math.random()*20)+236;
+    myHeight = (int)(Math.random()*30)+100;
+    myColor = color((int)(Math.random()*100),0,(int)(Math.random()*256));
     myOpacity = (int)(Math.random()*60) +60;
   }
   void show(){
-    //fill(myColor, myOpacity);
-    //ellipse(myX, myY, myWidth, myHeight);
-    //   fill(255);
-    //int[] more = new int[10];
-    //for(int i=0; i< 
    int diam = 0;
     float r = 250;
     noFill();
@@ -109,17 +102,17 @@ class Cloud extends Particle{
     diam++;
     r-=255/30.0;
   }
+  noStroke();
+  fill(myColor);
+  ellipse(myX, myY, 250, 250);
   }
     void move(){
     myX += Math.cos((float)myAngle)*mySpeed;
   }
    void reset(){
-    if( myX == 600 || myX == 200){
+    if( myX < (width/2)-10 || myX > (width/2)+10){
      myX = width/2;
      myY = height/2;
-     myAngle = Math.random()*360;
-     mySpeed = Math.random() * 7  + 2;
     }
   }
 }
-
